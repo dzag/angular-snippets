@@ -136,5 +136,13 @@
       }
     }
   },
+  "schematics": {
+    "@schematics/angular:component": {
+      "spec": false
+    },
+    "@schematics/angular:directive": {
+      "spec": false
+    }
+  },
   "defaultProject": "ngrx"
 }

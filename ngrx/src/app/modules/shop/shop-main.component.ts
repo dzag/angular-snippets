@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ShopState } from '@app/modules/shop/reducers';
+import { map } from 'rxjs/operators';
+import { FetchItemAction } from './actions/item.actions';
 
 @Component({
   selector: 'app-shop-main',
@@ -7,9 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopMainComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  get items$() {
+    return this.store.select('shop', 'items')
+      .pipe(map(items => {
+        return Object.values(items || {});
+      }));
   }
 
+  constructor(private store: Store<ShopState>) { }
+
+  ngOnInit() {
+    this.store.dispatch(new FetchItemAction());
+  }
+
+  onAddItem(item: any) {
+    console.log(item);
+  }
 }

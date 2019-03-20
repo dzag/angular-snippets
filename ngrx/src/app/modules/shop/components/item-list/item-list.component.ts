@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ShopService } from '../../shop.service';
-import { Store } from '@ngrx/store';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-item-list',
@@ -8,19 +6,14 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-  items: any[] = [];
 
-  constructor(private shopService: ShopService,
-              private store: Store<any>,
-  ) { }
+  @Input() items: any[] = [];
+
+  @Output() add = new EventEmitter();
+
+  constructor() { }
 
   ngOnInit() {
-    this.shopService.getItems().subscribe(items => {
-      this.items = items;
-    });
   }
 
-  add(item: any) {
-    console.log(item);
-  }
 }

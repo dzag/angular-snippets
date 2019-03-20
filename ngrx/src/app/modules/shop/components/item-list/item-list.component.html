@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let item of items">
     {{ item.name }}. Price: {{ item.price }}.
-    <span><a href="#" (click)="$event.preventDefault(); add(item)">Add</a></span>
+    <span><a href="#" (click)="$event.preventDefault(); add.emit(item)">Add</a></span>
   </li>
 </ul>
