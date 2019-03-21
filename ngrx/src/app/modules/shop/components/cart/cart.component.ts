@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ShopState } from '@app/modules/shop/reducers';
 import { combineLatest, Observable } from 'rxjs';
@@ -20,6 +20,10 @@ export class CartComponent implements OnInit {
   );
 
   items$ = this.store.select('shop', 'items');
+
+  @Output() decrease = new EventEmitter();
+
+  @Output() delete = new EventEmitter();
 
   get subTotal$() {
     return combineLatest(

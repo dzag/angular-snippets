@@ -3,6 +3,8 @@
   </app-item-list>
 </div>
 <div style="border: 1px solid;">
-  <app-cart></app-cart>
+  <app-cart (decrease)="onDecrease($event)"
+            (delete)="onDelete($event)">
+  </app-cart>
 </div>
 
