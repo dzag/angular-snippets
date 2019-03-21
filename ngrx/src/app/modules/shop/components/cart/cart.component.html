@@ -1,10 +1,16 @@
 Total: {{ total$ | async }}
 - Subtotal: {{ subTotal$ | async }}
 
-<ng-container *ngIf="items$ | async as items">
-  <div *ngFor="let cartItem of cartItems$ | async">
-    {{ items[cartItem.id].name }} - {{ cartItem.count }}
-    - <a href="#" (click)="$event.preventDefault(); decrease.emit(cartItem.id)">Decrease</a>
-    - <a href="#" (click)="$event.preventDefault(); delete.emit(cartItem.id)">Delete</a>
-  </div>
-</ng-container>
+<div *ngIf="isEmpty$ | async; else cartItems">
+  Cart is empty!
+</div>
+
+<ng-template #cartItems>
+  <ng-container *ngIf="items$ | async as items">
+    <div *ngFor="let cartItem of cartItems$ | async">
+      {{ items[cartItem.id].name }} - {{ cartItem.count }}
+      - <a href="#" (click)="$event.preventDefault(); decrease.emit(cartItem.id)">Decrease</a>
+      - <a href="#" (click)="$event.preventDefault(); delete.emit(cartItem.id)">Delete</a>
+    </div>
+  </ng-container>
+</ng-template>

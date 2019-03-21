@@ -21,6 +21,8 @@ export class CartComponent implements OnInit {
 
   items$ = this.store.select('shop', 'items');
 
+  isEmpty$ = this.store.select('shop', 'cart', 'empty');
+
   @Output() decrease = new EventEmitter();
 
   @Output() delete = new EventEmitter();
