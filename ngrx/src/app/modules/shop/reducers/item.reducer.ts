@@ -15,6 +15,6 @@ export const itemReducer: ActionReducer<ItemState, ItemActions> = (state = initi
     case ItemActionTypes.StoreItems:
       return mapKeys(action.payload, 'id');
     default:
-      return initialState;
+      return state;
   }
 };

@@ -1,1 +1,8 @@
-Total: {{ total }}
+Total: {{ total$ | async }}
+- Subtotal: {{ subTotal$ | async }}
+
+<ng-container *ngIf="items$ | async as items">
+  <div *ngFor="let cartItem of cartItems$ | async">
+    {{ items[cartItem.id].name }} - {{ cartItem.count }}
+  </div>
+</ng-container>

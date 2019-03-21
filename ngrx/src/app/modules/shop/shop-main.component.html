@@ -1,7 +1,8 @@
 <div>
-  <app-cart></app-cart>
-</div>
-<div>
   <app-item-list [items]="items$ | async" (add)="onAddItem($event)">
   </app-item-list>
 </div>
+<div style="border: 1px solid;">
+  <app-cart></app-cart>
+</div>
+

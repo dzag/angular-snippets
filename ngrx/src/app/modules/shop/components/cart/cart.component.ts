@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ShopState } from '@app/modules/shop/reducers';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  total = 0;
+  total$: Observable<number> = this.store.select(
+    'shop', 'cart', 'total'
+  );
 
-  constructor() { }
+  cartItems$: Observable<any> = this.store.select(
+    'shop', 'cart', 'items'
+  );
+
+  items$ = this.store.select('shop', 'items');
+
+  get subTotal$() {
+    return combineLatest(
+      this.items$,
+      this.cartItems$,
+    ).pipe(
+      map(([items, cartItems]) => {
+        return cartItems.reduce((prev, current) => {
+          return (current.count * items[current.id].price) + prev;
+        }, 0);
+      })
+    );
+  }
+
+  constructor(private store: Store<ShopState>) { }
 
   ngOnInit() {
   }
