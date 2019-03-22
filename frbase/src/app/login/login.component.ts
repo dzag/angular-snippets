@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder } from '@angular/forms';
 
+import { auth } from 'firebase/app';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('this.afAuth.auth', this.afAuth.auth);
   }
 
   login() {
@@ -42,8 +45,9 @@ export class LoginComponent implements OnInit {
     const { registerEmail, registerPassword } =
       this.registerGroup.value;
 
-    this.afAuth.auth
-      .createUserWithEmailAndPassword(registerEmail, registerPassword)
+    this.afAuth.auth.setPersistence(auth.Auth.Persistence.LOCAL)
+      .then(() => this.afAuth.auth
+        .createUserWithEmailAndPassword(registerEmail, registerPassword))
       .then(success => console.log(success))
       .catch(error => console.error(error));
   }
