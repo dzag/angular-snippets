@@ -1,0 +1,29 @@
+
+$size: 2px;
+
+.video-wrapper {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+}
+
+.drag-handle {
+  position: absolute;
+  background-color: red;
+  z-index: 1;
+
+  &.right {
+    width: $size;
+    height: 100%;
+    cursor: ew-resize;
+    right: 0;
+  }
+
+  &.bottom {
+    height: $size;
+    width: 100%;
+    cursor: ns-resize;
+    bottom: 0;
+  }
+
+}
