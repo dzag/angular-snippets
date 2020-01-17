@@ -1,0 +1,19 @@
+<bread-crumb-host #host>
+  <div>
+    <ng-container *ngFor="let b of host.breadcrumbs2; let last = last">
+      <ng-container *ngIf="!last">
+        <span>
+          <a href="#" [routerLink]="b.url" [queryParams]="b.params">{{ b.name }}</a>
+        </span> /
+      </ng-container>
+      <ng-container *ngIf="last">
+        <span><span>{{ b.name }}</span></span>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <router-outlet appWatchComponents></router-outlet>
+
+  <hr>
+  <pre>{{ host.breadcrumbs | json }}</pre>
+</bread-crumb-host>
